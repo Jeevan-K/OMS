@@ -1,0 +1,33 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride">
+
+<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!-- Display the new contact form -->
+    
+			<!--<lightning:flow aura:id="flowData" />
+            <lightning:button label="Save Order" variant="brand" onclick="{!c.handleSaveContact}"/> -->
+    
+   <lightning:recordEditForm aura:id="recordEditForm" 
+                             recordId="{!v.recordId}"
+                             objectApiName="Order"
+                             onsuccess="{!c.handleSuccess}">
+       <lightning:card iconName="standard:record" title="Create Order">
+        <div class="slds-p-horizontal--small">
+        <lightning:messages />
+        <lightning:inputField fieldName="AccountId" />
+            <lightning:inputField fieldName="EffectiveDate"/>
+            <lightning:inputField fieldName="Status"/>
+            <lightning:inputField fieldName="ContractId"/>
+        <lightning:button class="slds-m-top_small" type="submit" label="Create new" />
+    	</div>        
+    	</lightning:card>
+    </lightning:recordEditForm>
+    
+    
+    <!-- Display Lightning Data Service errors -->
+    <aura:if isTrue="{!not(empty(v.newOrderError))}">
+        <div class="recordError">
+            {!v.newOrderError}
+        </div>
+    </aura:if>
+    
+</aura:component>
