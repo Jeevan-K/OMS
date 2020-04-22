@@ -1,5 +1,7 @@
 <aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride">
 
+    <aura:attribute name="cardTtl" type="String" default="Create Record"></aura:attribute>
+    <!--<aura:attribute name="recordID" type="String" default="{!v.recordId}"></aura:attribute>-->
 <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <!-- Display the new contact form -->
     
@@ -10,14 +12,15 @@
                              recordId="{!v.recordId}"
                              objectApiName="Order"
                              onsuccess="{!c.handleSuccess}">
-       <lightning:card iconName="standard:record" title="Create Order">
+       <lightning:card iconName="standard:record" title="{!v.cardTtl}">
         <div class="slds-p-horizontal--small">
         <lightning:messages />
-        <lightning:inputField fieldName="AccountId" />
-            <lightning:inputField fieldName="EffectiveDate"/>
+        <lightning:inputField fieldName="AccountId" required="true"/>
+            <lightning:inputField fieldName="EffectiveDate" />
             <lightning:inputField fieldName="Status"/>
             <lightning:inputField fieldName="ContractId"/>
-        <lightning:button class="slds-m-top_small" type="submit" label="Create new" />
+            <lightning:button class="slds-button slds-button_brand" type="submit" label="Save" />
+            <lightning:button class="slds-button slds-button_neutral" onclick="{!c.handleCancel}" label="Cancel" />
     	</div>        
     	</lightning:card>
     </lightning:recordEditForm>
